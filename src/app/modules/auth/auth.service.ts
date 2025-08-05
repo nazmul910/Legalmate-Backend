@@ -33,10 +33,10 @@ const loginUser = async (payload:TLoginUser) =>{
   }
 
   const accessToken = createToken(
-    jwtPayload, config.jwt_access_secret as string,config.jwt_access_expires_in as string
+    jwtPayload, config.jwt_access_secret as string,Number(config.jwt_access_expires_in)
   )
   const refreshToken = createToken(
-    jwtPayload, config.jwt_refresh_secret as string,config.jwt_refresh_expires_in as string
+    jwtPayload, config.jwt_refresh_secret as string,Number(config.jwt_refresh_expires_in) 
   )
 
   return{
@@ -108,7 +108,7 @@ const refreshToken = async(token:string) =>{
   }
 
   const accessToken = createToken(
-    jwtPayload, config.jwt_access_secret as string,config.jwt_access_expires_in as string
+    jwtPayload, config.jwt_access_secret as string,Number(config.jwt_access_expires_in) 
   )
 
   return{
@@ -135,7 +135,7 @@ const forgetPassword = async(email:string) =>{
   }
 
   const resetPassword = createToken(
-    jwtPayload, config.jwt_access_secret as string, "10m"
+    jwtPayload, config.jwt_access_secret as string, 10 * 60 * 1000 // 10 minutes in milliseconds
   )
   const resetUILInk =`${config.reset_pass_ui_link}?id=${user?._id}&token=${resetPassword}`
 
