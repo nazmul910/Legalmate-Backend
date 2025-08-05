@@ -19,7 +19,7 @@ app.get("/",(req,res) =>{
   res.send("Hello Legalmate!")
 })
 
-
+//Not Found and Global Error Handler
 app.use(notFound)
 app.use(globalErrorHandler);
 
