@@ -134,10 +134,10 @@ const forgetPassword = async(email:string) =>{
     role: user.role
   }
 
-  const resetPassword = createToken(
+  const token = createToken(
     jwtPayload, config.jwt_access_secret as string, 10 * 60 * 1000 // 10 minutes in milliseconds
   )
-  const resetUILInk =`${config.reset_pass_ui_link}?id=${user?._id}&token=${resetPassword}`
+  const resetUILInk =`${config.reset_pass_ui_link}?id=${user?._id}&token=${token}`
 
   sendMail(user?.email, `<p> ${resetUILInk}</p>`)
 }
