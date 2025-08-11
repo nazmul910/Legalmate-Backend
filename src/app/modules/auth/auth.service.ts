@@ -137,7 +137,8 @@ const forgetPassword = async(email:string) =>{
   const token = createToken(
     jwtPayload, config.jwt_access_secret as string, 10 * 60 * 1000 // 10 minutes in milliseconds
   )
-  const resetUILInk =`${config.reset_pass_ui_link}?id=${user?._id}&token=${token}`
+  // const resetUILInk =`${config.reset_pass_ui_link}?id=${user?._id}&token=${token}`
+  const resetUILInk = `http://localhost:3000/reset-password?id=${user._id}&token=${token}`;
 
   sendMail(user?.email, `<p> ${resetUILInk}</p>`)
 }
