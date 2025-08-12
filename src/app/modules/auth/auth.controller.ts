@@ -22,6 +22,8 @@ const loginUser =catchAsync(async(req,res,next) =>{
     data:{accessToken}
   })
 })
+
+
 const changePassword =catchAsync(async(req,res,next) =>{
   const result = await AuthServices.changePassword(req.user, req.body);
 
