@@ -9,8 +9,8 @@ import { upload } from "../../utils/sendFileToCloudinary";
 
 const router = express.Router()
 
-router.get('/',auth(USER_ROLE.admin),LawyerController.getAllLawyers)
-router.get('/:id',auth(USER_ROLE.admin),LawyerController.getSingleLawyers)
+router.get('/',LawyerController.getAllLawyers)  //,auth(USER_ROLE.admin)
+router.get('/:id',LawyerController.getSingleLawyers)  //auth(USER_ROLE.admin)
 
 router.post(
   "/upload-image",
@@ -24,8 +24,7 @@ router.post(
 
 router.post(
   "/basic",
-  auth(USER_ROLE.lawyer,USER_ROLE.admin),
-  validateRequest(LawyerValidation.updateBasicProfileSchhema),
+  validateRequest(LawyerValidation.updateBasicProfileSchhema), //auth(USER_ROLE.lawyer,USER_ROLE.admin),
   LawyerController.addLawyerProfile
 );
 
