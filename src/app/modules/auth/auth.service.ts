@@ -38,7 +38,7 @@ const loginUser = async (payload:TLoginUser) =>{
   const jwtPayload = {
     userId : user._id.toString(),
     role: user.role,
-    lawyerId: lawyerId  //for single lawyer data find it use newly
+    lawyerId            //for single lawyer data find it use newly
   }
 
   const accessToken = createToken(
