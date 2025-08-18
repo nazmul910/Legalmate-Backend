@@ -7,6 +7,7 @@ import { createToken, verifyToken } from "./auth.utils";
 import config from "../../config";
 import { JwtPayload } from "jsonwebtoken";
 import sendMail from "../../utils/SendEmail";
+import { Lawyer } from "../lawyer/lawyer.model";
 
 
 const loginUser = async (payload:TLoginUser) =>{
@@ -27,9 +28,17 @@ const loginUser = async (payload:TLoginUser) =>{
     throw new ApiError(httpStatus.FORBIDDEN,"Password did not match!!") 
   }
 
+    // lawyer হলে তার profile বের করো
+  let lawyerId = null;
+  if (user.role === "lawyer") {
+    const lawyer = await Lawyer.findOne({ user: user._id });
+    lawyerId = lawyer?._id.toString();
+  }
+
   const jwtPayload = {
     userId : user._id.toString(),
-    role: user.role
+    role: user.role,
+    lawyerId: lawyerId  //for single lawyer data find it use newly
   }
 
   const accessToken = createToken(
