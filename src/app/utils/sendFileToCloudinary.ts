@@ -19,7 +19,6 @@ export const sendFileToCloudinary = (fileName: string, filePath: string, type: s
         if (error) reject(error);
         resolve(result);
 
-        // লোকাল ফাইল delete করে দাও
         fs.unlink(filePath, (err) => {
           if (err) console.log(err);
           else console.log("File is Deleted");
@@ -29,7 +28,8 @@ export const sendFileToCloudinary = (fileName: string, filePath: string, type: s
   })
 }
 
-// 🔑 uploads ফোল্ডার ensure করা
+// when we deploy ta production level then create own way make a folder 
+
 const uploadPath = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
