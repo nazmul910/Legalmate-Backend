@@ -4,33 +4,40 @@ import multer from 'multer'
 import fs from 'fs'
 import path from "path";
 
-    cloudinary.config({ 
-        cloud_name: config.cloudinary_cloud_name, 
-        api_key: config.cloudinary_api_key, 
-        api_secret: config.cloudanary_api_secret 
-    });
+cloudinary.config({ 
+  cloud_name: config.cloudinary_cloud_name, 
+  api_key: config.cloudinary_api_key, 
+  api_secret: config.cloudanary_api_secret 
+});
 
-export const sendFileToCloudinary = (fileName:string, path:string, type:string) =>{
-    return new Promise((resolve,reject) =>{
-      cloudinary.uploader.upload( path, {  public_id: fileName , resource_type: type ==="image"?"image":"raw"},
-        function (error,result) {
-            if(error) reject(error)
-            resolve(result)  
-            
-            fs.unlink(path,(err) =>{
-                if(err) console.log(err)
-                else console.log("File is Deleted")  
-            })
-        }
-       )
-       
-    })
+export const sendFileToCloudinary = (fileName: string, filePath: string, type: string) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      filePath,
+      { public_id: fileName, resource_type: type === "image" ? "image" : "raw" },
+      function (error, result) {
+        if (error) reject(error);
+        resolve(result);
+
+        // লোকাল ফাইল delete করে দাও
+        fs.unlink(filePath, (err) => {
+          if (err) console.log(err);
+          else console.log("File is Deleted");
+        });
+      }
+    )
+  })
 }
-    
+
+// 🔑 uploads ফোল্ডার ensure করা
+const uploadPath = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // cb(null, process.cwd() + "/uploads")
-    cb(null, path.join(process.cwd(), "uploads"));
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
@@ -39,4 +46,3 @@ const storage = multer.diskStorage({
 })
 
 export const upload = multer({ storage: storage })
-   
