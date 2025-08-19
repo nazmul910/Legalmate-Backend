@@ -41,7 +41,7 @@ const getAllLaywerFromDb = async() =>{
 
 const uploadLawyerImageIntoDB = async(userData:JwtPayload,file:any) =>{
   const lawyer = await Lawyer.findOne({user: userData.userId})
-
+  console.log("services: ",userData,file);
   if(!lawyer) throw new ApiError(404,"Not Found!")
 
   if(file){

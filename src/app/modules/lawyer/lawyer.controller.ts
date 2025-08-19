@@ -15,16 +15,7 @@ const getAllLawyers = catchAsync(async (req:Request,res:Response) =>{
   })
 });
 
-const uploadLawyerImage = catchAsync(async(req:Request,res:Response,next) =>{
-  console.log(req.user,req.file)
-  const result = await LawyerServices.uploadLawyerImageIntoDB(req.user, req.file)
-  sendResponse(res,{
-    statusCode:httpStatus.OK,
-      success:true,
-      message:"Lawyers photo uploaded successfully",
-      data:result
-  })         
-})
+
 
 const getSingleLawyers = catchAsync(async(req:Request,res:Response) =>{
   const result = await LawyerServices.getSingleLawyersFromDB(req.params.id)
@@ -34,6 +25,17 @@ const getSingleLawyers = catchAsync(async(req:Request,res:Response) =>{
       message:"Lawyers data1 retrieved successfully",
       data:result
   })
+})
+
+const uploadLawyerImage = catchAsync(async(req:Request,res:Response,next) =>{
+  console.log("reqFromlawerContorller: ",req.user,req.file)
+  const result = await LawyerServices.uploadLawyerImageIntoDB(req.user, req.file)
+  sendResponse(res,{
+    statusCode:httpStatus.OK,
+      success:true,
+      message:"Lawyers photo uploaded successfully",
+      data:result
+  })         
 })
 
 
