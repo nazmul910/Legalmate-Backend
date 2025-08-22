@@ -55,7 +55,7 @@ const forgetPassword =catchAsync(async(req,res,next) =>{
     success:true,
     message:"Please check your mail",
     data:result
-  })
+  }) 
 })
 
 
