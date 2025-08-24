@@ -25,7 +25,7 @@ const licenseSchema = z.object({
     licenseNumber:z.string().optional(),
     acquiredDate: z.string(),
     expiryDate: z.string().optional(),
-    status: z.enum(["active","inactive","suspended","revoke"])
+    status: z.enum(["active","inactive","suspended","revoked"])
   })
 })
 
