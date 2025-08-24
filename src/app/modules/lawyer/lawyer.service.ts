@@ -74,7 +74,7 @@ const addLawyerProfileInDB = async (id:string ,payload:Partial<TLawyer>) =>{
 
 const addLawyerLicenseInDB = async (id:string,data:TLicense) =>{
   await checkLawyerStatus(id);
-  const result = await Lawyer.findByIdAndUpdate(
+  const result = await Lawyer.findOneAndUpdate(
     {user:id},
     {$set:{license:data}},
     {new:true}
