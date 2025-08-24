@@ -59,7 +59,7 @@ router.post(
 )
 
 router.delete(
-  "/delete-educatin",
+  "/delete-education",
   auth(USER_ROLE.lawyer),
   validateRequest(LawyerValidation.deleteEducationschema),
   LawyerController.deleteLawyerEducation

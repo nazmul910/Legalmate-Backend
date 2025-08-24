@@ -6,13 +6,13 @@ import { ProfileServices } from "./profile.service";
 import { JwtPayload } from "jsonwebtoken";
 
 const getLawyerProfile = catchAsync(async (req: Request, res: Response) => {
-  const { userId } = req.user as JwtPayload;  
-  const result = await ProfileServices.getLawyerProfileFromDb(userId);
+
+  const result = await ProfileServices.getLawyerProfileFromDb(req.user);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Lawyer profile retrieved successfully",
+    message: "Profile retrieved successfully",
     data: result,
   });
 });

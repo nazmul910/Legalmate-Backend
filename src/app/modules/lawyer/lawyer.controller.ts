@@ -81,6 +81,7 @@ const addLawyerDocument = catchAsync(async (req:Request,res:Response) =>{
     data:result
    })
 })
+
 const deleteLawyerDocument = catchAsync(async (req:Request,res:Response) =>{
   const result = await LawyerServices.deleteLawyerDocumentInDB(
     req.user.userId,

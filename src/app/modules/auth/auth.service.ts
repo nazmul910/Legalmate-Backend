@@ -138,7 +138,7 @@ const forgetPassword = async(email:string) =>{
     throw new ApiError(httpStatus.NOT_FOUND,"User is blocked")
   }  
 
-  const jwtPayload = {
+  const jwtPayload = { 
     userId : user._id.toString(),
     role: user.role
   }
