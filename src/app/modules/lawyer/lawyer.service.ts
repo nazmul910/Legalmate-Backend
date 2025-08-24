@@ -121,7 +121,7 @@ const addLawyerEducationInDB = async (id:string,data:TEducation) =>{
   await checkLawyerStatus(id);
   const result = await Lawyer.findOneAndUpdate(
     {user:id},
-    {$pull:{education:data}},
+    {$push:{education:data}},
     {new:true}
   )
   return result
