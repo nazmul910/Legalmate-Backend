@@ -38,7 +38,7 @@ const deleteDocumentSchema = z.object({
 const educationSchema = z.object({
   body: z.object({
     degree: z.string(),
-    fieldOfStydy: z.string().optional(),
+    fieldOfStudy: z.string().optional(),
     institution: z.string(),
     startDate: z.string(),
     endDate: z.string().optional(),
