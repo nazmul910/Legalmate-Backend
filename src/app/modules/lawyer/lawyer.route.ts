@@ -26,6 +26,7 @@ router.get('/:id',LawyerController.getSingleLawyers)  //auth(USER_ROLE.admin)
 
 router.post(
   "/basic",
+  auth(USER_ROLE.lawyer,USER_ROLE.admin),
   validateRequest(LawyerValidation.updateBasicProfileSchhema), //auth(USER_ROLE.lawyer,USER_ROLE.admin),
   LawyerController.addLawyerProfile
 );
